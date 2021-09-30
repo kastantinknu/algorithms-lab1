@@ -31,6 +31,7 @@ class RBFS:
         if best[0] > f_limit:
             return Answer(False, f_limit=best[0])
         alternative = self.__queue.get()
+        self.__queue.empty()
         result = self.__rbfs(best[1], min(best, alternative)[0])
         if result is not None and result.is_success:
             return result
