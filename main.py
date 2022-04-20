@@ -1,3 +1,4 @@
+# -*- coding: cp1251 -*-
 #from LDFS.LDFS import LDFS
 from RBFS.RBFS import RBFS
 import random
@@ -18,7 +19,7 @@ def generate_chessboards(number):
         result.append(board)
     return result
 
-
+#hardcod chessboard
 chessboards = [
     [[7, 0], [0, 1], [7, 2], [5, 3], [2, 4], [6, 5], [1, 6], [3, 7]]
     #,
@@ -43,19 +44,39 @@ chessboards = [
     #[[4, 0], [0, 1], [3, 2], [5, 3], [2, 4], [6, 5], [1, 6], [3, 7]]
 ]
 
-
+#result printer
 print('------RBFS------')
+#print for all chessboard
 for chessboard in chessboards:
+    #time stamp 
     start_time = time.time()
+
+    #initialize class object and load chessboard to Recursive Best-First Search algorithm 
     rbfs = RBFS(chessboard)
+
+    #print original chessboard
     print('Input chessboard = ' + str(chessboard))
+
+    #run method - Recursive Best-First Search algorithm
     rbfs.recursive_best_first_search()
+
+    #run method - Recursive Best-First Search answer
     print(rbfs.answer)
+
+    #run method - Recursive Best-First Search calculate state number
     print('states number = ' + str(rbfs.states_number))
+
+    #run method - Recursive Best-First Search calculate iteration number
     print('iterations = ' + str(rbfs.iterations))
+
+    #
     print('dead ends = ' + str(rbfs.dead_ends))
+
+    #calculate time difference
+
     print("%s seconds" % (time.time() - start_time))
-    print()
+    #print final chessboard 
+    print("")
 
 line = ['X - - - - - - -'
        ,'- X - - - - - -'

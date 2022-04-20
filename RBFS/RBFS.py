@@ -2,16 +2,29 @@ from RBFS.answer import Answer
 from queue import PriorityQueue
 import copy
 
-
 class RBFS:
 
+    #initialize object
     def __init__(self, initial_chessboard):
+        #initialize attribute chessboard and others
         self.initial_chessboard = initial_chessboard
+
+        #empty answer 
         self.answer = None
+
+        #empty checked states array
         self.__checked_states = []
+
+        #initial iteration number
         self.iterations = 0
+
+        #initial state number
         self.states_number = 0
+
+        #initial dead ends number (безвыходное положение, тупик)
         self.dead_ends = 0
+
+        #
         self.__queue = PriorityQueue()
 
     def recursive_best_first_search(self):
