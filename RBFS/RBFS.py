@@ -2,29 +2,16 @@ from RBFS.answer import Answer
 from queue import PriorityQueue
 import copy
 
+
 class RBFS:
 
-    #initialize object
     def __init__(self, initial_chessboard):
-        #initialize attribute chessboard and others
         self.initial_chessboard = initial_chessboard
-
-        #empty answer 
         self.answer = None
-
-        #empty checked states array
         self.__checked_states = []
-
-        #initial iteration number
         self.iterations = 0
-
-        #initial state number
         self.states_number = 0
-
-        #initial dead ends number (безвыходное положение, тупик)
         self.dead_ends = 0
-
-        #
         self.__queue = PriorityQueue()
 
     def recursive_best_first_search(self):
@@ -72,6 +59,10 @@ class RBFS:
                 if chessboard[i][0] == chessboard[j][0] or chessboard[i][1] == chessboard[j][1] \
                         or abs(chessboard[i][0] - chessboard[j][0]) == abs(chessboard[i][1] - chessboard[j][1]):
                     result += 1
+                    #print(str(chessboard[i][0]) + ' == ' + str(chessboard[j][0]) +
+                    #' or '+str(chessboard[i][1])+' == '+str(chessboard[j][1])+
+                    #' or '+'abs('+str(chessboard[i][0]) + ' - ' + str(chessboard[j][0]) +') '+'=='+' abs('+str(chessboard[i][1]) + ' - ' + str(chessboard[j][1]) +') ', result)
+
         return result
 
     @staticmethod
@@ -80,5 +71,115 @@ class RBFS:
             for j in range(i + 1, 8):
                 if chessboard[i][0] == chessboard[j][0] or chessboard[i][1] == chessboard[j][1] \
                         or abs(chessboard[i][0] - chessboard[j][0]) == abs(chessboard[i][1] - chessboard[j][1]):
+                    print(str(chessboard[i][0]) + ' == ' + str(chessboard[j][0]) +
+                    ' or '+str(chessboard[i][1])+' == '+str(chessboard[j][1])+
+                    ' or '+'abs('+str(chessboard[i][0]) + ' - ' + str(chessboard[j][0]) +') '+'=='+' abs('+str(chessboard[i][1]) + ' - ' + str(chessboard[j][1]) +') ')
                     return False
         return True
+
+#from RBFS.answer import Answer
+#from queue import PriorityQueue
+#import copy
+
+#class RBFS:
+
+#    #initialize object
+#    def __init__(self, initial_chessboard):
+#        #initialize attribute chessboard and others
+#        self.initial_chessboard = initial_chessboard
+
+#        #empty answer 
+#        self.answer = None
+
+#        #empty checked states array
+#        self.__checked_states = []
+
+#        #initial iteration number
+#        self.iterations = 0
+
+#        #initial state number
+#        self.states_number = 0
+
+#        #initial dead ends number (безвыходное положение, тупик)
+#        self.dead_ends = 0
+
+## ласс PriorityQueue() модул€ queue представл€ет собой конструктор дл€ очереди с приоритетом.
+
+##јргумент maxsize - это целое число, которое устанавливает верхний 
+##предел дл€ количества элементов, которые могут быть помещены в очередь.
+##¬ставка будет блокироватьс€ после достижени€ этого размера, пока элементы очереди не будут использованы.
+
+#        self.__queue = PriorityQueue()
+
+#    #метод принимает начальное состо€ние, число типа float по умолчанию inf Ч бесконечность, и возвращает результат
+#    def recursive_best_first_search(self):
+#        self.answer = self.__rbfs(self.initial_chessboard, float("inf"))
+
+#    #метод выводит статус расчета, результирующее расположени€,
+#    def __rbfs(self, current_state, f_limit):
+#        #счетчик
+#        self.iterations += 1
+
+#        if RBFS.__chessboard_validation(current_state):
+#            return Answer(True, result_chessboard=current_state)
+#        successors = self.__get_successors(current_state)
+#        if len(successors) == 0:
+#            self.dead_ends += 1
+#            return Answer(False, f_limit=float("inf"))
+#        for successor in successors:
+#            self.__queue.put((RBFS.__heuristic_func(successor), successor))
+#        best = self.__queue.get()
+#        if best[0] > f_limit:
+#            return Answer(False, f_limit=best[0])
+#        alternative = self.__queue.get()
+#        self.__queue.empty()
+#        result = self.__rbfs(best[1], min(best, alternative)[0])
+#        if result is not None and result.is_success:
+#            return result
+#        else:
+#            self.dead_ends += 1
+#            return self.__rbfs(self.__queue.get()[1], float('inf'))
+
+#    def __get_successors(self, chessboard):
+#        result = []
+#        for i in range(8):
+#            for j in range(8):
+#                temp = copy.deepcopy(chessboard)
+#                temp[i][0] = j
+#                if not chessboard[i][0] == j and temp not in self.__checked_states:
+#                    result.append(copy.deepcopy(temp))
+#                    self.__checked_states.append(temp)
+#        self.states_number += len(result)
+#        return result
+
+#    @staticmethod
+#    def __heuristic_func(chessboard):
+#        result = 0
+#        for i in range(8):
+#            for j in range(i + 1, 8):
+#                if chessboard[i][0] == chessboard[j][0] or chessboard[i][1] == chessboard[j][1] \
+#                        or abs(chessboard[i][0] - chessboard[j][0]) == abs(chessboard[i][1] - chessboard[j][1]):
+#                    result += 1
+#        return result
+
+#    @staticmethod
+#    def __chessboard_validation(chessboard):
+#        for i in range(8):
+#            for j in range(i + 1, 8):
+#                if chessboard[i][0] == chessboard[j][0] or chessboard[i][1] == chessboard[j][1] \
+#                        or abs(chessboard[i][0] - chessboard[j][0]) == abs(chessboard[i][1] - chessboard[j][1]):
+#                   #print(str(chessboard[i][0]) + ' == ' + str(chessboard[j][0]) +
+#                   #   ' or '+str(chessboard[i][1])+' == '+str(chessboard[j][1])+
+#                   #   ' or '+'abs('+str(chessboard[i][0]) + ' - ' + str(chessboard[j][0]) +') '+'=='+' abs('+str(chessboard[i][1]) + ' - ' + str(chessboard[j][1]) +') ')
+#                   return False
+#                #print(str(chessboard[i][0]) + ' == ' + str(chessboard[j][0]) +
+#                #      ' or '+str(chessboard[i][1])+' == '+str(chessboard[j][1])+
+#                #      ' or '+'abs('+str(chessboard[i][0]) + ' - ' + str(chessboard[j][0]) +') '+'=='+' abs('+str(chessboard[i][1]) + ' - ' + str(chessboard[j][1]) +') ')
+#                return True
+
+##    @staticmethod Ч используетс€ дл€ создани€ метода, который ничего не знает
+##   о классе или экземпл€ре, через который он был вызван. ќн просто получает переданные
+##  аргументы, без не€вного первого аргумента, и его определение неизмен€емо через наследование.
+
+##ѕроще говор€, @staticmethod Ч это вроде обычной функции, определенной внутри класса,
+##котора€ не имеет доступа к экземпл€ру, поэтому ее можно вызывать без создани€ экземпл€ра класса.

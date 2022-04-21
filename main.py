@@ -1,27 +1,27 @@
 # -*- coding: cp1251 -*-
 #from LDFS.LDFS import LDFS
 from RBFS.RBFS import RBFS
-import random
+#import random
 import time
 
 #chessbpards generator
-def generate_chessboards(number):
-    result = []
-    for _ in range(number):
-        board = []
-        for j in range(8):
-            is_added = False
-            while not is_added:
-                queen = [random.randint(0, 7), j]
-                if queen not in board:
-                    board.append(queen)
-                    is_added = True
-        result.append(board)
-    return result
+#def generate_chessboards(number):
+#    result = []
+#    for _ in range(number):
+#        board = []
+#        for j in range(8):
+#            is_added = False
+#            while not is_added:
+#                queen = [random.randint(0, 7), j]
+#                if queen not in board:
+#                    board.append(queen)
+#                    is_added = True
+#        result.append(board)
+#    return result
 
 #hardcod chessboard
 chessboards = [
-    [[7, 0], [0, 1], [7, 2], [5, 3], [2, 4], [6, 5], [1, 6], [3, 7]]
+    [[0, 0], [0, 1], [0, 2], [3, 3], [0, 4], [7, 5], [5, 6], [2, 7]]
     #,
     #[[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7]],
     #[[1, 0], [0, 1], [7, 2], [5, 3], [2, 4], [6, 5], [1, 6], [3, 7]],
@@ -43,6 +43,24 @@ chessboards = [
     #[[4, 0], [0, 1], [7, 2], [5, 3], [2, 4], [6, 5], [1, 6], [9, 7]],
     #[[4, 0], [0, 1], [3, 2], [5, 3], [2, 4], [6, 5], [1, 6], [3, 7]]
 ]
+line = ['X - - - - - - -'
+       ,'- X - - - - - -'
+       ,'- - X - - - - -'
+       ,'- - - X - - - -'
+       ,'- - - - X - - -'
+       ,'- - - - - X - -'
+       ,'- - - - - - X -'
+       ,'- - - - - - - X']
+#print for all chessboard
+for chessboard in chessboards:
+    for i in range(8):
+        for j in range(8):
+           if 7-i == chessboard[j][0]:
+             print('X', end=" ")
+           elif 7-i != chessboard[j][0]:
+             print('-', end=" ")
+        print()
+
 
 #result printer
 print('------RBFS------')
@@ -78,29 +96,47 @@ for chessboard in chessboards:
     #print final chessboard 
     print("")
 
-line = ['X - - - - - - -'
-       ,'- X - - - - - -'
-       ,'- - X - - - - -'
-       ,'- - - X - - - -'
-       ,'- - - - X - - -'
-       ,'- - - - - X - -'
-       ,'- - - - - - X -'
-       ,'- - - - - - - X']
 
-i = 0
-j = 0
-while i < 8:
-    while j < 8:
-        if 7-i == chessboard[j][0]:
+
+
+
+print()
+for i in range(8):
+    for j in range(8):
+        if 7-i == rbfs.answer.result_chessboard[j][0]:
             print(line[j])
-        j += 1
-    j = 0
-    i += 1
+
+#print()
+#i = 0
+#j = 0
+#while i < 8:
+#    while j < 8:
+#        if 7-i == chessboard[j][0]:
+#            print(line[j])
+#        j += 1
+#    j = 0
+#    i += 1
+
+#print(rbfs.__chessboard_validation(chessboards[0]))
 
 
 
 
 
+
+#i = 0
+#j = 0
+#while i < 8:
+#    while j < 8:
+#        print(i, j, end="\t")
+#        j += 1
+#    print("\n")
+#    j = 0
+#    i += 1
+
+
+            #    print('X')
+                #print(line[j],7-i,j)
 
 
 
