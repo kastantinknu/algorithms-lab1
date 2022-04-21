@@ -18,7 +18,7 @@ import time
 #                    is_added = True
 #        result.append(board)
 #    return result
-
+#
 #hardcod chessboard
 chessboards = [
     [[0, 0], [0, 1], [0, 2], [3, 3], [0, 4], [7, 5], [5, 6], [2, 7]]
